@@ -60,7 +60,7 @@ if ! grep -q '# Added to enable CORS and KeeWeb compatibility' "/var/packages/We
 	sed -i 's:^User root$:# Added to enable CORS and KeeWeb compatibility\n\n&:' "/var/packages/WebDAVServer/target/etc/httpd/conf/httpd.conf-webdav"
 	((serviceRestart++))
 fi
-if ! grep -q '# Added to enable CORS and KeeWeb compatibility' "/var/packages/WebDAVServer/target/etc/httpd/conf/httpd.conf-webdav"; then
+if ! grep -q 'LoadModule rewrite_module modules/mod_rewrite.so' "/var/packages/WebDAVServer/target/etc/httpd/conf/httpd.conf-webdav"; then
 	sed -i 's:# Added to enable CORS and KeeWeb compatibility:&\nLoadModule rewrite_module modules/mod_rewrite.so:' "/var/packages/WebDAVServer/target/etc/httpd/conf/httpd.conf-webdav"
 	((serviceRestart++))
 fi
