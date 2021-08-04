@@ -108,10 +108,16 @@ fi
 # Restart service if needed
 if [ $serviceRestart -gt 0 ]; then
 	echo "Config modified. Restarting WebDAV service..."
-	synoservice --restart pkgctl-WebDAVServer
+	if [ -x /usr/syno/sbin/synoservice  ]; then
+	    synoservice --restart pkgctl-WebDAVServer
+	elif [ -x /bin/systemctl  ]; then
+	    systemctl restart pkgctl-WebDAVServer.service
+	else
+		echo "Could not restart WebDAV service! Please reboot or try to restart manually via Package Center."
+		exit 1
+	fi
 	echo "WebDAV service restarted."
-	exit 1
 else
 	echo "Config untouched."
-	exit 0
 fi
+exit 0
