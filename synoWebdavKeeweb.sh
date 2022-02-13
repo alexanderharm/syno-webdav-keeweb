@@ -74,12 +74,12 @@ if ! grep -q 'Header always set Access-Control-Allow-Origin "*"' "/var/packages/
 	sed -i 's|    # Added to enable CORS and KeeWeb compatibility|&\n    Header always set Access-Control-Allow-Origin "*"|' "/var/packages/WebDAVServer/target/etc/httpd/conf/extra/httpd-ssl.conf-webdav"
 	((serviceRestart++))
 fi
-if ! grep -q 'Header always set Access-Control-Allow-Headers "origin, content-type, cache-control, accept, authorization, if-match, destination, overwrite"' "/var/packages/WebDAVServer/target/etc/httpd/conf/extra/httpd-ssl.conf-webdav"; then
-	sed -i 's|    Header always set Access-Control-Allow-Origin "\*"|&\n    Header always set Access-Control-Allow-Headers "origin, content-type, cache-control, accept, authorization, if-match, destination, overwrite"|' "/var/packages/WebDAVServer/target/etc/httpd/conf/extra/httpd-ssl.conf-webdav"
+if ! grep -q 'Header always set Access-Control-Allow-Headers "origin, content-type, cache-control, accept, authorization, if-match, destination, overwrite, depth"' "/var/packages/WebDAVServer/target/etc/httpd/conf/extra/httpd-ssl.conf-webdav"; then
+	sed -i 's|    Header always set Access-Control-Allow-Origin "\*"|&\n    Header always set Access-Control-Allow-Headers "origin, content-type, cache-control, accept, authorization, if-match, destination, overwrite, depth"|' "/var/packages/WebDAVServer/target/etc/httpd/conf/extra/httpd-ssl.conf-webdav"
 	((serviceRestart++))
 fi
 if ! grep -q 'Header always set Access-Control-Expose-Headers "ETag"' "/var/packages/WebDAVServer/target/etc/httpd/conf/extra/httpd-ssl.conf-webdav"; then
-	sed -i 's|    Header always set Access-Control-Allow-Headers "origin, content-type, cache-control, accept, authorization, if-match, destination, overwrite"|&\n    Header always set Access-Control-Expose-Headers "ETag"|' "/var/packages/WebDAVServer/target/etc/httpd/conf/extra/httpd-ssl.conf-webdav"
+	sed -i 's|    Header always set Access-Control-Allow-Headers "origin, content-type, cache-control, accept, authorization, if-match, destination, overwrite, depth"|&\n    Header always set Access-Control-Expose-Headers "ETag"|' "/var/packages/WebDAVServer/target/etc/httpd/conf/extra/httpd-ssl.conf-webdav"
 	((serviceRestart++))
 fi
 if ! grep -q 'Header always set Access-Control-Allow-Methods "GET, HEAD, POST, PUT, OPTIONS, MOVE, DELETE, COPY, LOCK, UNLOCK"' "/var/packages/WebDAVServer/target/etc/httpd/conf/extra/httpd-ssl.conf-webdav"; then
